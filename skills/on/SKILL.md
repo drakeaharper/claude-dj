@@ -1,7 +1,7 @@
 ---
 name: on
 description: Enable Claude DJ (play sound while working)
-user_invocable: true
+user-invocable: true
 ---
 
 Enable Claude DJ by running this command:
