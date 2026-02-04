@@ -1,41 +1,43 @@
 # Claude DJ
 
-A Claude Code plugin that plays audio while Claude is working and stops when Claude is waiting for your input.
+A Claude Code plugin that pauses your music/videos while Claude is working and resumes playback when Claude is done.
+
+Works with YouTube, Spotify, Apple Music, and other media players.
 
 ## Installation
 
-### From GitHub
+### From Marketplace
+
+1. In Claude Code, run `/plugin`
+2. Go to **Marketplaces** tab → Add `drakeaharper/claude-dj`
+3. Go to **Discover** tab → Install `claude-dj`
+
+### With --plugin-dir (Development)
 
 ```bash
-claude plugins add https://github.com/drakeaharper/claude-dj
-```
-
-### From Local Directory
-
-```bash
-claude plugins add /path/to/claude-dj
+claude --plugin-dir /path/to/claude-dj
 ```
 
 ## How It Works
 
 This plugin uses Claude Code's hooks system to:
 
-1. **Start audio** when Claude begins working (`PreToolUse` hook)
-2. **Stop audio** when Claude finishes and waits for input (`Stop` hook)
+1. **Pause media** when Claude begins working (`PreToolUse` hook)
+2. **Resume media** when Claude finishes and waits for input (`Stop` hook)
+
+On macOS, it simulates the media play/pause key (F8). On Linux, it uses `playerctl`.
 
 ## Enable / Disable
 
 The plugin is **off by default**. Use slash commands inside Claude Code to control it:
 
 ```
-/claude-dj:on      # Enable sound
-/claude-dj:off     # Disable sound
+/claude-dj:on      # Enable (will pause media while Claude works)
+/claude-dj:off     # Disable
 /claude-dj:status  # Check current status
 ```
 
 ### Alternative: Shell Commands
-
-You can also use the toggle script from your terminal:
 
 ```bash
 ~/.claude/plugins/claude-dj/scripts/toggle.sh on
@@ -43,62 +45,41 @@ You can also use the toggle script from your terminal:
 ~/.claude/plugins/claude-dj/scripts/toggle.sh status
 ```
 
-## Customizing the Sound
-
-Edit `scripts/start-sound.sh` to change the audio file.
+## Requirements
 
 ### macOS
 
-Change the `afplay` line to point to any audio file:
-
-```bash
-afplay /path/to/your/sound.aiff
-```
-
-System sounds are located in `/System/Library/Sounds/`.
+Requires accessibility permissions for Terminal/iTerm to control media keys:
+- System Preferences → Security & Privacy → Privacy → Accessibility
+- Add your terminal app
 
 ### Linux
 
-Change the `paplay` or `aplay` line:
+Install `playerctl`:
 
 ```bash
-paplay /path/to/your/sound.oga
-```
+# Debian/Ubuntu
+sudo apt install playerctl
 
-### Windows
+# Fedora
+sudo dnf install playerctl
 
-Change the PowerShell command:
-
-```bash
-powershell.exe -c "(New-Object Media.SoundPlayer 'C:\path\to\sound.wav').PlaySync()"
-```
-
-## Uninstalling
-
-```bash
-claude plugins remove claude-dj
+# Arch
+sudo pacman -S playerctl
 ```
 
 ## Troubleshooting
 
-### Sound doesn't stop
+### Media doesn't pause
 
-Run manually to clean up:
+On macOS, ensure your terminal has accessibility permissions.
 
-```bash
-/path/to/claude-dj/scripts/stop-sound.sh
-```
+### Media doesn't resume
 
-### No sound on Linux
-
-Ensure you have PulseAudio (`paplay`) or ALSA (`aplay`) installed:
+Run manually to clean up state:
 
 ```bash
-# Debian/Ubuntu
-sudo apt install pulseaudio-utils
-
-# Or for ALSA
-sudo apt install alsa-utils
+rm -f /tmp/claude-dj-paused
 ```
 
 ## License

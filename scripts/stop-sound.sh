@@ -1,33 +1,26 @@
 #!/bin/bash
-# Stop the playing sound
+# Resume system audio when Claude stops working
 
-PID_FILE="/tmp/claude-dj.pid"
+STATE_FILE="/tmp/claude-dj-paused"
 
-if [ -f "$PID_FILE" ]; then
-  PID=$(cat "$PID_FILE")
-
-  # Kill the process and all its children
-  if [ -n "$PID" ]; then
-    # Kill the main process
-    kill "$PID" 2>/dev/null
-
-    # Also kill any child processes (the actual audio players)
-    pkill -P "$PID" 2>/dev/null
-  fi
-
-  rm -f "$PID_FILE"
+# Only resume if we previously paused
+if [ ! -f "$STATE_FILE" ]; then
+  exit 0
 fi
 
-# Belt and suspenders: kill any lingering audio processes started by us
+# Resume media playback
 case "$(uname -s)" in
   Darwin)
-    # Kill afplay processes playing our specific sound
-    pkill -f "afplay.*Submarine.aiff" 2>/dev/null
+    # macOS - simulate media play key (F8)
+    osascript -e 'tell application "System Events" to key code 100' 2>/dev/null
     ;;
   Linux)
-    pkill -f "paplay.*bell.oga" 2>/dev/null
-    pkill -f "aplay.*Front_Center.wav" 2>/dev/null
+    # Linux - use playerctl if available
+    if command -v playerctl &>/dev/null; then
+      playerctl play 2>/dev/null
+    fi
     ;;
 esac
 
-exit 0
+# Remove the state marker
+rm -f "$STATE_FILE"
