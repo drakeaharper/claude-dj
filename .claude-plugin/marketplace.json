@@ -1,12 +1,18 @@
 {
   "name": "claude-dj-marketplace",
-  "description": "Audio feedback plugins for Claude Code",
+  "owner": {
+    "name": "Drake Harper"
+  },
+  "metadata": {
+    "description": "Audio feedback plugins for Claude Code",
+    "version": "1.0.0"
+  },
   "plugins": [
     {
       "name": "claude-dj",
       "description": "Plays audio while Claude is working, stops when waiting for input",
       "version": "1.0.0",
-      "source": "."
+      "source": "./"
     }
   ]
 }
