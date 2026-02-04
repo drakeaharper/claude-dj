@@ -1,6 +1,5 @@
 {
   "name": "claude-dj",
-  "version": "1.0.2",
-  "description": "Plays audio while Claude is working, stops when waiting for input",
-  "skills": "./skills/"
+  "version": "1.0.3",
+  "description": "Plays audio while Claude is working, stops when waiting for input"
 }
