@@ -25,33 +25,22 @@ This plugin uses Claude Code's hooks system to:
 
 ## Enable / Disable
 
-The plugin is **off by default**. Use the toggle script to control it:
+The plugin is **off by default**. Use slash commands inside Claude Code to control it:
+
+```
+/claude-dj:on      # Enable sound
+/claude-dj:off     # Disable sound
+/claude-dj:status  # Check current status
+```
+
+### Alternative: Shell Commands
+
+You can also use the toggle script from your terminal:
 
 ```bash
-# Turn on
 ~/.claude/plugins/claude-dj/scripts/toggle.sh on
-
-# Turn off
 ~/.claude/plugins/claude-dj/scripts/toggle.sh off
-
-# Check status
 ~/.claude/plugins/claude-dj/scripts/toggle.sh status
-
-# Toggle (flip current state)
-~/.claude/plugins/claude-dj/scripts/toggle.sh
-```
-
-Or create an alias in your shell config:
-
-```bash
-alias claude-dj="~/.claude/plugins/claude-dj/scripts/toggle.sh"
-```
-
-Then simply use:
-```bash
-claude-dj on
-claude-dj off
-claude-dj status
 ```
 
 ## Customizing the Sound
