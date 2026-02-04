@@ -7,7 +7,7 @@ A Claude Code plugin that plays audio while Claude is working and stops when Cla
 ### From GitHub
 
 ```bash
-claude plugins add https://github.com/yourusername/claude-dj
+claude plugins add https://github.com/drakeaharper/claude-dj
 ```
 
 ### From Local Directory
@@ -22,6 +22,37 @@ This plugin uses Claude Code's hooks system to:
 
 1. **Start audio** when Claude begins working (`PreToolUse` hook)
 2. **Stop audio** when Claude finishes and waits for input (`Stop` hook)
+
+## Enable / Disable
+
+The plugin is **off by default**. Use the toggle script to control it:
+
+```bash
+# Turn on
+~/.claude/plugins/claude-dj/scripts/toggle.sh on
+
+# Turn off
+~/.claude/plugins/claude-dj/scripts/toggle.sh off
+
+# Check status
+~/.claude/plugins/claude-dj/scripts/toggle.sh status
+
+# Toggle (flip current state)
+~/.claude/plugins/claude-dj/scripts/toggle.sh
+```
+
+Or create an alias in your shell config:
+
+```bash
+alias claude-dj="~/.claude/plugins/claude-dj/scripts/toggle.sh"
+```
+
+Then simply use:
+```bash
+claude-dj on
+claude-dj off
+claude-dj status
+```
 
 ## Customizing the Sound
 

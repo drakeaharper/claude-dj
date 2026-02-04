@@ -2,8 +2,14 @@
 # Start playing sound if not already playing
 # Uses a PID file to track the background process
 
+ENABLED_FILE="$HOME/.claude-dj-enabled"
 PID_FILE="/tmp/claude-dj.pid"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check if enabled
+if [ ! -f "$ENABLED_FILE" ]; then
+  exit 0
+fi
 
 # Check if already playing
 if [ -f "$PID_FILE" ]; then
