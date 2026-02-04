@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$PLUGIN_DIR/scripts/start-sound.sh\"",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/start-sound.sh",
             "async": true
           }
         ]
@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$PLUGIN_DIR/scripts/stop-sound.sh\""
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/stop-sound.sh"
           }
         ]
       }

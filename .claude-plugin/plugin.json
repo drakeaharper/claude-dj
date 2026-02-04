@@ -1,5 +1,5 @@
 {
   "name": "claude-dj",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Pauses your music/videos while Claude is working, resumes when done"
 }
