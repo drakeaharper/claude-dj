@@ -11,7 +11,7 @@
     {
       "name": "claude-dj",
       "description": "Plays audio while Claude is working, stops when waiting for input",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "source": "./"
     }
   ]

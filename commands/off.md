@@ -1,7 +1,5 @@
 ---
-name: off
 description: Disable Claude DJ (stop playing sound)
-user-invocable: true
 ---
 
 Disable Claude DJ by running this command:
